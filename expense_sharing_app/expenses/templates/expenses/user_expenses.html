@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>User Expenses</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'create_user' %}">Create User</a>
+        <a href="{% url 'user_expenses' %}">User Expenses</a>
+        <a href="{% url 'add_expense' %}">Add Expense</a>
+        <a href="{% url 'balance_sheet' %}">Balance Sheet</a>
+    </div>
+    
+    <h1>User Expenses</h1>
+
+    <h2>Users</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.name }} - {{ user.email }} - {{ user.mobile }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Expenses</h2>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Split Method</th>
+        </tr>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.description }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.get_split_method_display }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{% url 'add_expense' %}">Add a New Expense</a>
+</body>
+</html>
